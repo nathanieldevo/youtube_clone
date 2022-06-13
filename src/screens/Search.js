@@ -6,7 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MiniCard from "../components/MiniCard";
 import { useDispatch, useSelector } from "react-redux";
 
-// https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=songs&type=video&key=AIzaSyBUDIc8uHOJYnXO9EsoscfQB2Ior3GmMqw
+// https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=100&q=songs&type=video&key=AIzaSyBUDIc8uHOJYnXO9EsoscfQB2Ior3GmMqw
 const Search =({navigation})=>{
     const [value,setValue]=useState("")
     // const [miniCardData,setMiniCard]= useState([])
@@ -24,8 +24,6 @@ const Search =({navigation})=>{
             // console.log(data);
             setLoading(false)
             // setMiniCard(data.items)
-            console.log(data.items);
-            console.log("data.items");
             dispatch({type:"add",payload:data.items})
 
         })
@@ -45,7 +43,7 @@ const Search =({navigation})=>{
             <Ionicons onPress={()=>navigation.goBack()} name="arrow-back-sharp" size={32} color="black" />
             <TextInput 
             style={{width:"70%",
-                    backgroundColor:"red"
+                    backgroundColor:"#fff"
     }}
             value={value}
             onChangeText={(text)=>setValue(text)}

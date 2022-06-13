@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/components/Home';
 import { MaterialIcons } from '@expo/vector-icons';
 import Search from './src/screens/Search';
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer,DefaultTheme,DarkTheme} from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import VideoPlayer from './src/screens/VideoPlayer';
@@ -12,6 +12,13 @@ import {Provider} from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import reducer from './src/reducers/reducer';
 
+const customDarktheme={
+  ...DarkTheme,
+  colors:{
+    ...DarkTheme.colors,
+    headerColor:"#404040",
+  }
+}
 const store = configureStore({reducer})
 const Stack = createNativeStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -19,7 +26,7 @@ const Tabs = createBottomTabNavigator()
  const RootHome =()=>{
    return(
       <Tabs.Navigator 
-      screenOptions={({ route }) => ({
+         screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;
 
@@ -37,20 +44,26 @@ const Tabs = createBottomTabNavigator()
         },
         tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'gray',
-      })}
+      })
+    }
       >      
-            <Tabs.Screen  name="home" component={Home}/>
-            <Tabs.Screen  name="explore" component={Explore}/>
-            <Tabs.Screen  name="subscribe" component={Subscribe}/>
+            <Tabs.Screen options={{headerShown: false}}  name="home" component={Home}/>
+            <Tabs.Screen options={{headerShown: false}}  name="explore" component={Explore}/>
+            <Tabs.Screen options={{headerShown: false}}  name="subscribe" component={Subscribe}/>
         </Tabs.Navigator>
    )
  }
 export default function App() {
   return (
     <Provider store={store}>
-<NavigationContainer>
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="rootHome" component={RootHome} />
+<NavigationContainer
+theme={DarkTheme}
+>
+    <Stack.Navigator screenOptions={{
+    headerShown: false
+  }}
+ headerMode="none">
+      <Stack.Screen name="rootHome" options={{headerShown: false}} component={RootHome} />
       <Stack.Screen name="search" component={Search} />
       <Stack.Screen name="videoplayer" component={VideoPlayer} />
     </Stack.Navigator>
