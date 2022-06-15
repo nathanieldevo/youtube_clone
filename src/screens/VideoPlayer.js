@@ -1,7 +1,7 @@
 import React from "react";
 import { View,Text, Dimensions } from "react-native";
 import Constant from 'expo-constants'
-import WebView from "react-native-webview";
+import {WebView} from "react-native-webview";
 
 
 const VideoPlayer=({route})=>{

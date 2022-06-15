@@ -5,14 +5,21 @@ import { FontAwesome } from '@expo/vector-icons';
 import Constant from 'expo-constants'
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+
 const Header=()=>{
-    const mycolor = "#212121"
     const navigation =useNavigation()
+    const dispatch = useDispatch()
+    const {colors}=useTheme()
+    const currentTheme =  useSelector(state=>{
+        return state.myDarkMode
+    })
+    const mycolor = colors.iconColor
     return(
         <View style={{
             height:45,
-            backgroundColor:"#ffffff",
+            backgroundColor: colors.headerColor,
             flexDirection:"row",
             justifyContent:"space-between",
             // shadowColor: mycolor,
@@ -46,7 +53,9 @@ const Header=()=>{
             <Ionicons name="md-search" size={32} color={mycolor}
             onPress={()=>navigation.navigate("search")}
             />
-            <MaterialIcons name="account-circle" size={32} color={mycolor}/>
+            <MaterialIcons name="account-circle" size={32} color={mycolor}
+            onPress={()=>dispatch({type:"change_theme",payload:!currentTheme})}
+            />
             </View>
         </View>
     )

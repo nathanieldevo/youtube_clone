@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 
 const Home=({navigation})=>{
     const CardData = useSelector(state=>{
-        return state
+        return state.cardData
     })
     return(
         <View style={{flex:1}}>

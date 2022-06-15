@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import { View,TextInput,FlatList,ActivityIndicator} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '@react-navigation/native';
 import Constant from 'expo-constants'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MiniCard from "../components/MiniCard";
@@ -8,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 // https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=100&q=songs&type=video&key=AIzaSyBUDIc8uHOJYnXO9EsoscfQB2Ior3GmMqw
 const Search =({navigation})=>{
+    const {colors}=useTheme()
+    const mycolor=colors.iconColor
     const [value,setValue]=useState("")
     // const [miniCardData,setMiniCard]= useState([])
     const dispatch = useDispatch()
@@ -40,15 +43,15 @@ const Search =({navigation})=>{
                 elevation:5,
                 // borderColor:"white"
             }}>
-            <Ionicons onPress={()=>navigation.goBack()} name="arrow-back-sharp" size={32} color="black" />
+            <Ionicons style={{color:mycolor}} onPress={()=>navigation.goBack()} name="arrow-back-sharp" size={32} color="black" />
             <TextInput 
             style={{width:"70%",
-                    backgroundColor:"#fff"
+                    backgroundColor: colors.headerColor
     }}
             value={value}
             onChangeText={(text)=>setValue(text)}
             />
-            <MaterialCommunityIcons onPress={()=>fetchdata()} name="send" size={24} color="black" />
+            <MaterialCommunityIcons style={{color:mycolor}} onPress={()=>fetchdata()} name="send" size={24} color="black" />
             </View>
             {/* <MiniCard />
             <MiniCard />

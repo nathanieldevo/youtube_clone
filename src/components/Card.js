@@ -1,12 +1,14 @@
 import React from 'react'
 import { View,Text,Image,Dimensions,TouchableOpacity } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,useTheme } from '@react-navigation/native';
 
 
 
 const Card=(props)=>{
+    const {colors} = useTheme()
     const navigation=useNavigation()
+    const textcolor = colors.iconColor
     return(
         <TouchableOpacity  
         onPress={()=>{
@@ -42,13 +44,15 @@ const Card=(props)=>{
            marginLeft:10
        }}>
             <Text style={{
+                color : textcolor,
                 fontSize:20,
                 width:Dimensions.get("screen").width-50
         }}
                 ellipsizeMode="tail"
                 numberOfLines={1}
                 >{props.title}</Text>
-            <Text>{props.channel}</Text>
+            <Text style={{
+                color : textcolor,}}>{props.channel}</Text>
         </View>
        </View>
 
